@@ -1,7 +1,23 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
+// Allow requests from any origin (for development only, restrict in production)
+header("Access-Control-Allow-Origin: *");
+
+// Allow common methods
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+
+// Allow these headers from client requests
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+
+// Handle OPTIONS requests (preflight)
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    // Return only the headers and terminate the script for preflight
+    exit(0);
+}
+
 header('Content-Type: application/json');
 
 $redis = new Redis();
