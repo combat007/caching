@@ -20,7 +20,7 @@ if (!$conn) {
 }
 
 // Query to count online participants today
-$query = "SELECT COUNT(DISTINCT participant_id) as count FROM raw_data WHERE online_status=1 AND created_at::date = CURRENT_DATE";
+$query = "SELECT COUNT(DISTINCT participant_id) as count FROM raw_data WHERE timestamp::date = CURRENT_DATE";
 $result = pg_query($conn, $query);
 
 if (!$result) {
