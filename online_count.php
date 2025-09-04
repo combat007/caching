@@ -44,7 +44,7 @@ if (!$conn) {
 }
 
 // Query to count online participants today
-$query = "SELECT COUNT(DISTINCT participant_id) as count FROM raw_data";
+$query = "SELECT COUNT(*) as count FROM raw_data";
 $result = pg_query($conn, $query);
 
 if (!$result) {
@@ -56,7 +56,7 @@ $row = pg_fetch_assoc($result);
 $count = (int)$row['count'];
 
 // Cache count in Redis for 1 hour (3600 seconds)
-$redis->setex($cacheKey, 3600, $count);
+$redis->setex($cacheKey, 30, $count);
 
 echo json_encode(['count' => $count]);
 ?>
