@@ -7,7 +7,7 @@ header('Content-Type: application/json');
 $redis = new Redis();
 try {
     $redis->connect('192.168.1.5', 6379);
-    echo "Connected to Redis successfully.";
+    // echo "Connected to Redis successfully.";
 } catch (Exception $e) {
     echo "Failed to connect to Redis: " . $e->getMessage();
 }
