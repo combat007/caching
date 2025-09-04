@@ -13,7 +13,7 @@ if ($cachedCount !== false) {
 }
 
 // Connect to PostgreSQL
-$conn = pg_connect("host=localhost dbname=yourdb user=youruser password=yourpass");
+$conn = pg_connect("host=192.168.1.5 dbname=tags user=postgres password=redhat");
 if (!$conn) {
     echo json_encode(['error' => 'DB connection failed']);
     exit;
