@@ -17,7 +17,7 @@
 
   <script>
     function fetchOnlineCount() {
-      fetch('http://localhost/api/online_count.php')
+      fetch('http://192.168.1.5/caching/online_count.php')
         .then(response => response.json())
         .then(data => {
           if (data.count !== undefined) {
