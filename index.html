@@ -1,1 +1,41 @@
-<h1>Caching</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Online Participants Count</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { color: #333; }
+    #count { font-size: 2em; color: #007BFF; }
+  </style>
+</head>
+<body>
+  <h1>Participants Online Today</h1>
+  <p id="count">Loading...</p>
+  <button id="refreshBtn">Refresh</button>
+
+  <script>
+    function fetchOnlineCount() {
+      fetch('http://localhost/api/online_count.php')
+        .then(response => response.json())
+        .then(data => {
+          if (data.count !== undefined) {
+            document.getElementById('count').innerText = data.count;
+          } else {
+            document.getElementById('count').innerText = 'Error fetching data';
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          document.getElementById('count').innerText = 'Error fetching data';
+        });
+    }
+
+    document.getElementById('refreshBtn').addEventListener('click', fetchOnlineCount);
+
+    // Fetch count on page load
+    fetchOnlineCount();
+  </script>
+</body>
+</html>
