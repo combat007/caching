@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 $redis = new Redis();
-$redis->connect('127.0.0.1', 6379);
+$redis->connect('192.168.1.5', 6379);
 
 $cacheKey = 'online_count_today';
 $cachedCount = $redis->get($cacheKey);
