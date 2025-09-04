@@ -1,8 +1,16 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 header('Content-Type: application/json');
 
 $redis = new Redis();
-$redis->connect('192.168.1.5', 6379);
+try {
+    $redis->connect('192.168.1.5', 6379);
+    echo "Connected to Redis successfully.";
+} catch (Exception $e) {
+    echo "Failed to connect to Redis: " . $e->getMessage();
+}
 
 $cacheKey = 'online_count_today';
 $cachedCount = $redis->get($cacheKey);
