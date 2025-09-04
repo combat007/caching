@@ -1,4 +1,5 @@
 <?php
+echo "hi";
 header('Content-Type: application/json');
 
 $redis = new Redis();
