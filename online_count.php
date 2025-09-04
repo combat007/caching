@@ -20,21 +20,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 header('Content-Type: application/json');
 
-$redis = new Redis();
-try {
-    $redis->connect('192.168.1.5', 6379);
-    // echo "Connected to Redis successfully.";
-} catch (Exception $e) {
-    echo "Failed to connect to Redis: " . $e->getMessage();
-}
+// $redis = new Redis();
+// try {
+//     $redis->connect('192.168.1.5', 6379);
+//     // echo "Connected to Redis successfully.";
+// } catch (Exception $e) {
+//     echo "Failed to connect to Redis: " . $e->getMessage();
+// }
 
-$cacheKey = 'online_count_today';
-$cachedCount = $redis->get($cacheKey);
+// $cacheKey = 'online_count_today';
+// $cachedCount = $redis->get($cacheKey);
 
-if ($cachedCount !== false) {
-    echo json_encode(['count' => (int)$cachedCount]);
-    exit;
-}
+// if ($cachedCount !== false) {
+//     echo json_encode(['count' => (int)$cachedCount]);
+//     exit;
+// }
 
 // Connect to PostgreSQL
 $conn = pg_connect("host=192.168.1.5 dbname=tags user=postgres password=redhat");
@@ -56,7 +56,7 @@ $row = pg_fetch_assoc($result);
 $count = (int)$row['count'];
 
 // Cache count in Redis for 1 hour (3600 seconds)
-$redis->setex($cacheKey, 3600, $count);
+// $redis->setex($cacheKey, 3600, $count);
 
 echo json_encode(['count' => $count]);
 ?>
